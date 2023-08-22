@@ -2,11 +2,18 @@ FROM nvidia/cudagl:11.4.1-runtime
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update && apt-get install -y zip unzip wget gnupg2 ca-certificates curl fonts-liberation libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libcups2 libgtk-3-0 libnspr4 libnss3 libu2f-udev libvulkan1 libxcomposite1 libxdamage1 xdg-utils build-essential libasound2 && \
+RUN apt-get update && apt-get install -y zip unzip git wget gnupg2 ca-certificates curl fonts-liberation libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libcups2 libgtk-3-0 \
+  libnspr4 libnss3 libu2f-udev libvulkan1 libxcomposite1 libxdamage1 xdg-utils build-essential libasound2 nasm yasm pkgconf && \
   wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
   dpkg -i google-chrome-stable_current_amd64.deb
 
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
   apt-get install -y nodejs
+
+RUN git clone https://github.com/FFmpeg/nv-codec-headers.git && cd nv-codec-headers && git checkout n9.0.18.3 && make install && cd ..
+
+RUN git clone https://git.ffmpeg.org/ffmpeg.git && cd ffmpeg && git checkout n4.2.2 \
+  && ./configure --enable-cuda --enable-cuvid --enable-nvenc --enable-nonfree --enable-libnpp --extra-cflags=-I/usr/local/cuda/include  --extra-ldflags=-L/usr/local/cuda/lib64 \
+  && make -j$(nproc) && make install
 
 RUN rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* 
