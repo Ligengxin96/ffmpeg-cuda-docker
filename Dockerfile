@@ -13,7 +13,8 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
 RUN git clone https://github.com/FFmpeg/nv-codec-headers.git && cd nv-codec-headers && git checkout n9.0.18.3 && make install && cd ..
 
 RUN git clone https://git.ffmpeg.org/ffmpeg.git && cd ffmpeg && git checkout n4.2.2 \
-  && ./configure --enable-nonfree --enable-cuda --enable-cuvid --enable-nvenc --enable-nonfree --enable-libnpp --extra-cflags=-I/usr/local/cuda/include --extra-ldflags=-L/usr/local/cuda/lib64 \
+  && ./configure --enable-nonfree --enable-cuda --enable-cuvid --enable-nvenc --enable-nonfree --enable-libnp --enable-filter=xfade \
+  --extra-cflags=-I/usr/local/cuda/include --extra-ldflags=-L/usr/local/cuda/lib64 \
   && make -j$(nproc) && make install
 
 RUN rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* 
