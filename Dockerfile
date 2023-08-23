@@ -17,6 +17,6 @@ RUN git clone https://git.ffmpeg.org/ffmpeg.git && cd ffmpeg && git checkout n4.
   && ./configure --enable-nonfree --enable-cuda --enable-cuvid --enable-nvenc --enable-nonfree --enable-libnpp --enable-opencl --enable-gpl \
   --enable-libmp3lame --enable-libx264 --enable-libx265 --enable-libvpx \
   --extra-cflags=-I/usr/local/cuda/include --extra-ldflags=-L/usr/local/cuda/lib64 \
-  && make -j$(nproc) && make install
+  && make -j$(nproc) && make install && cd ..
 
-RUN rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* 
+RUN rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* ./nv-codec-headers ./ffmpeg
