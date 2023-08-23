@@ -1,4 +1,4 @@
-FROM nvidia/cudagl:11.0-runtime-ubuntu18.04
+FROM nvidia/cudagl:11.0-devel-ubuntu18.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
