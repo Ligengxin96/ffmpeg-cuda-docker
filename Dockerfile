@@ -2,9 +2,7 @@ FROM nvidia/cudagl:11.0-devel-ubuntu18.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get install -y wget
-
-RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub && apt-key add 7fa2af80.pub
+RUN curl -O https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub && apt-key add 7fa2af80.pub
 
 RUN apt-get update && apt-get install -y zip unzip git curl gnupg2 ca-certificates fonts-liberation libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libcups2 libgtk-3-0 \
   libnspr4 libnss3 libu2f-udev libvulkan1 libxcomposite1 libxdamage1 xdg-utils build-essential nasm yasm pkgconf \
