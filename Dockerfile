@@ -1,4 +1,4 @@
-FROM nvidia/cudagl:11.0-devel-ubuntu20.04
+FROM nvidia/cudagl:11.1-devel-ubuntu20.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
