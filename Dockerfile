@@ -11,6 +11,10 @@ RUN apt-get update && apt-get install -y zip unzip git wget gnupg2 ca-certificat
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 RUN export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")" &&  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && nvm install 18.16.1
 
+echo "export NVM_DIR="\$HOME/.nvm"" >> ~/.bashrc && \
+    echo "[ -s "\$NVM_DIR/nvm.sh" ] && \. "\$NVM_DIR/nvm.sh"  # This loads nvm" >> ~/.bashrc && \
+    echo "[ -s "\$NVM_DIR/bash_completion" ] && \. "\$NVM_DIR/bash_completion"  # This loads nvm bash_completion" >> ~/.bashrc
+
 RUN git clone https://github.com/FFmpeg/nv-codec-headers.git && cd nv-codec-headers && git checkout n9.0.18.3 && make install && cd ..
 
 RUN git clone https://git.ffmpeg.org/ffmpeg.git && cd ffmpeg && git checkout n4.4.4 \
