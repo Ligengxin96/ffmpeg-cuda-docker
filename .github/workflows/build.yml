@@ -23,4 +23,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ligengxin96/ffmpeg-cuda11:1.0.1
+          tags: ligengxin96/ffmpeg-cuda10:1.0.1
