@@ -1,15 +1,15 @@
-FROM nvidia/cudagl:10.2-devel-ubuntu18.04
+FROM nvidia/cudagl:11.0-devel-ubuntu20.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get install -y zip unzip git wget gnupg2 ca-certificates curl fonts-liberation libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libcups2 libgtk-3-0 \
-  libnspr4 libnss3 libc6 libu2f-udev libvulkan1 libxcomposite1 libxdamage1 xdg-utils build-essential nasm yasm pkgconf \
+  libnspr4 libnss3 libu2f-udev libvulkan1 libxcomposite1 libxdamage1 xdg-utils build-essential nasm yasm pkgconf \
   libasound2 libmp3lame-dev libx264-dev libx265-dev libvpx-dev && \
   wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
   dpkg -i google-chrome-stable_current_amd64.deb
 
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-RUN export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")" &&  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && nvm install 18.16.1
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
+  apt-get install -y nodejs
 
 RUN git clone https://github.com/FFmpeg/nv-codec-headers.git && cd nv-codec-headers && git checkout n9.0.18.3 && make install && cd ..
 
@@ -20,7 +20,3 @@ RUN git clone https://git.ffmpeg.org/ffmpeg.git && cd ffmpeg && git checkout n4.
   && make -j$(nproc) && make install && cd ..
 
 RUN rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* ./nv-codec-headers ./ffmpeg
-
-RUN echo "export NVM_DIR="\$HOME/.nvm"" >> ~/.bashrc && \
-    echo "[ -s "\$NVM_DIR/nvm.sh" ] && \. "\$NVM_DIR/nvm.sh"  # This loads nvm" >> ~/.bashrc && \
-    echo "[ -s "\$NVM_DIR/bash_completion" ] && \. "\$NVM_DIR/bash_completion"  # This loads nvm bash_completion" >> ~/.bashrc
