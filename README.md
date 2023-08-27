@@ -1,4 +1,4 @@
-# A docker image contain ffmpeg, chrome, cuda, nodejs
+# A Docker image based on Ubuntu 20.04 that includes FFmpeg, Chrome, CUDA 11, and Node.js 18.
 
 ### Cannot load *.so issue
 Check docker run command whether add `-e NVIDIA_DRIVER_CAPABILITIES=all` 
@@ -11,7 +11,7 @@ Check docker run command whether add `--gpus all` option
 
 ```dockerfile
 # render-service image dockerfile
-FROM ligengxin96/ffmpeg:1.0.1
+FROM ligengxin96/ffmpeg-cuda11:1.0.0
 
 ARG APP_DIR=/app
 ARG ENV=development
