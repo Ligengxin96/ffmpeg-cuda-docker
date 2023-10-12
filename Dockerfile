@@ -19,7 +19,7 @@ RUN git clone https://github.com/FFmpeg/nv-codec-headers.git && cd nv-codec-head
 
 RUN git clone https://git.ffmpeg.org/ffmpeg.git && cd ffmpeg && git checkout n4.4.4 \
   && ./configure --enable-nonfree --enable-cuda --enable-cuvid --enable-nvenc --enable-nonfree --enable-libnpp --enable-opencl --enable-gpl \
-  --enable-libmp3lame --enable-libx264 --enable-libx265 --enable-libvpx \
+  --enable-libmp3lame --enable-libx264 --enable-libx265 --enable-libvpx --enable-libpng \
   --extra-cflags=-I/usr/local/cuda/include --extra-ldflags=-L/usr/local/cuda/lib64 \
   && make -j$(nproc) && make install && cd ..
 
