@@ -12,9 +12,6 @@ RUN apt-get update && apt-get install -y zip unzip git wget gnupg2 ca-certificat
   wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
   dpkg -i google-chrome-stable_current_amd64.deb
 
-RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
-  apt-get install -y nodejs
-
 RUN git clone https://github.com/FFmpeg/nv-codec-headers.git && cd nv-codec-headers && git checkout n9.0.18.3 && make install && cd ..
 
 RUN git clone https://git.ffmpeg.org/ffmpeg.git && cd ffmpeg && git checkout n4.4.4 \
@@ -22,5 +19,8 @@ RUN git clone https://git.ffmpeg.org/ffmpeg.git && cd ffmpeg && git checkout n4.
   --enable-libmp3lame --enable-libx264 --enable-libx265 --enable-libvpx --enable-libpng \
   --extra-cflags=-I/usr/local/cuda/include --extra-ldflags=-L/usr/local/cuda/lib64 \
   && make -j$(nproc) && make install && cd ..
+
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
+  apt-get install -y nodejs
 
 RUN rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* ./nv-codec-headers ./ffmpeg
