@@ -23,4 +23,6 @@ RUN git clone https://git.ffmpeg.org/ffmpeg.git && cd ffmpeg && git checkout n4.
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
   apt-get install -y nodejs
 
+RUN ffmpeg -codecs 
+
 RUN rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* ./nv-codec-headers ./ffmpeg
