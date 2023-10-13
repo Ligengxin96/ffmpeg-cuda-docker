@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y zip unzip git wget gnupg2 ca-certificat
   libnspr4 libnss3 libu2f-udev libvulkan1 libxcomposite1 libxdamage1 xdg-utils build-essential nasm yasm pkgconf \
   libasound2 libmp3lame-dev libx264-dev libx265-dev libvpx-dev libpng-dev zlib1g-dev && \
   mkdir -p /etc/apt/keyrings && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
-  echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.16.1 nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \
+  echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18 nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \
   wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
   dpkg -i google-chrome-stable_current_amd64.deb
 
