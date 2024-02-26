@@ -9,10 +9,10 @@ RUN rm /etc/apt/sources.list.d/cuda.list && apt-key del 7fa2af80 \
 RUN apt-get update && apt-get install -y zip unzip git wget gnupg2 ca-certificates curl fonts-liberation libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libcups2 libgtk-3-0 \
   libnspr4 libnss3 libu2f-udev libvulkan1 libxcomposite1 libxdamage1 xdg-utils build-essential nasm yasm pkgconf \
   libasound2 libmp3lame-dev libx264-dev libx265-dev libvpx-dev libpng-dev zlib1g-dev && \
-  mkdir -p /etc/apt/keyrings && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
-  echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \
-  wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
-  dpkg -i google-chrome-stable_current_amd64.deb
+  mkdir -p /etc/apt/keyrings && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+  dpkg -i google-chrome-stable_current_amd64.deb && \ 
+  wget https://nodejs.org/dist/v18.16.1/node-v18.16.1-linux-arm64.tar.gz && tar -xvf node-v18.16.1-linux-arm64.tar.gz && \
+  mv node-v18.16.1-linux-arm64 /usr/local/ && export PATH=$PATH:/usr/local/node-v18.16.1-linux-arm64/bin && rm -f node-v18.16.1-linux-arm64.tar.gz
 
 RUN apt-get update && apt-get install -y nodejs 
 
