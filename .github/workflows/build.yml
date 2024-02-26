@@ -31,3 +31,4 @@ jobs:
         with:
           push: true
           tags: ligengxin96/ffmpeg-cuda11-arm:1.0.0
+          platforms: linux/arm64
