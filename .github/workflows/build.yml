@@ -30,5 +30,5 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ligengxin96/ffmpeg-cuda11-arm:1.0.1
+          tags: ligengxin96/ffmpeg-cuda11-arm:1.0.0
           platforms: linux/arm64
