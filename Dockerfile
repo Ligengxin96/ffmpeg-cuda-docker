@@ -9,10 +9,11 @@ RUN rm /etc/apt/sources.list.d/cuda.list && apt-key del 7fa2af80 \
 RUN apt-get update && apt-get install -y zip unzip git wget gnupg2 ca-certificates curl fonts-liberation libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libcups2 libgtk-3-0 \
   libnspr4 libnss3 libu2f-udev libvulkan1 libxcomposite1 libxdamage1 xdg-utils build-essential nasm yasm pkgconf \
   libasound2 libmp3lame-dev libx264-dev libx265-dev libvpx-dev libpng-dev zlib1g-dev && \
+  libx11-xcb1  libgbm1 fontconfig ttf-mscorefonts-installer libglapi-mesa libgl1 mesa-utils && \
   mkdir -p /etc/apt/keyrings && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
   echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \
   wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
-  dpkg -i google-chrome-stable_current_amd64.deb
+  dpkg -i google-chrome-stable_current_amd64.deb && mkfontscale
 
 RUN apt-get update && apt-get install -y nodejs 
 
